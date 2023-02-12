@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <title>Monitor de Ajuda</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://192.168.0.7:3000/style_coord.css" />
+  <script>
+    //Cria um som, fazendo referencia sempre ao arquivo no servidor      
+    const playSound = () => {
+      const audio = new Audio('http://192.168.0.7:3000/som');
+      return audio.play();
+    }
+    
+    //Pega hora e minuto
+    const now = new Date();
+    const hoursAndMinutes = now.getHours() + ':' + now.getMinutes();
+    //declara o socket
+    const socket = io();
+    //conta li para imprimir ordem
+    var conta = 0;
+    //Recebe os valores do servidor e cria se uma Lista e play um som de aviso
+    socket.on('new message', (data) => {
+      conta++;
+        // busca o elemento UL
+        let ol = document.getElementById("messages");
+        // cria um elemento LI
+        let li = document.createElement('li');
+        // cria o elemento de quebra de linha
+        let br = document.createElement('br');
+        li.appendChild(document.createTextNode( conta +")"+ data + " | " + hoursAndMinutes));
+        ol.prepend(li);
+        playSound();
+    });
+  </script>
+
+
+
+</head>
+
+<body>
+    <ol class="ol" id="messages"></ol>
+</body>
+
+</html>
