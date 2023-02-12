@@ -34,3 +34,9 @@ io.on('connection', (socket) => {
     console.log('A user disconnected');
   });
 });
+
+/*
+  Há necessecidade de criar mais outras coordenações, para isso criamos server.listen na porta 3001 e assim por diante
+  sempre que houver necessidade. Adendo. Não sei se é a melhor pratica criar diversos servidores e se isso pode afetar
+  na leitura/envio de mensagens.
+*/
