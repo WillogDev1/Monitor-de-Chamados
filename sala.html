@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>Enviar Solicitação</title>
+
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="http://192.168.0.7:3000/style_sala.css" />
+  
+  /*
+  Note que em href usamos o Ip para referenciar, esse Ip é o da maquina em que você iniciou o servidor
+  */
+
+  <script>
+
+    const socket = io();
+
+    //Pega valores do URLSTRING e envia para o emit
+    function sendMessage() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var value1 = urlParams.get('sala');
+      var value2 = urlParams.get('bloco');
+      var value3 = "Sala: " + value1 + " | " + "Bloco: " + value2;
+      socket.emit('send message', value3);
+    }
+  </script>
+</head>
+
+<body>
+  <div style="text-align: center;">
+    <h1>Chamar!</h1>
+    <button onclick="sendMessage()">Solicitar Ajuda!</button>
+  </div>
+</body>
+
+</html>
